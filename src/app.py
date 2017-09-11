@@ -78,7 +78,7 @@ def api_score():
     Returns:
         str: String confirming insertion into mongo
     '''
-    url = "http://galvanize-case-study-on-fraud.herokuapp.com/data_point"
+    url = "URL of live data feed"
     data = urllib2.urlopen(url).read()
     data = json.loads(data)
     data = pd.DataFrame(list(zip(*data.items())[1]), index=list(zip(*data.items())[0]))
@@ -86,7 +86,7 @@ def api_score():
     name2 = data['name'][0]
     country = data['country'][0]
     name = data['org_name']
-    # model = Model()
+    model = Model()
     model.load_pandas_data(data)
     model.insert_to_mongo(table_name='website_predictions')
     prediction = model.predict()
@@ -96,6 +96,5 @@ def api_score():
 
 
 if __name__ == '__main__':
-    #model = Model()
 
     app.run()
